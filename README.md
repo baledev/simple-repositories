@@ -1,0 +1,1 @@
+Simple Laravel 5 Repositories Pattern

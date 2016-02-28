@@ -1,0 +1,34 @@
+{
+    "name": "siganurame/repositories",
+    "description": "Simple Laravel 5 Repositories Pattern",
+    "keywords": [
+        "laravel",
+        "repository",
+        "pattern",
+        "repositories"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hermansyah",
+            "email": "eiximey@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "illuminate/support": "5.*",
+        "illuminate/filesystem": "5.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Siganurame\\Repositories\\": "src/Siganurame/Repositories"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.x-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

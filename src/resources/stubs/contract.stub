@@ -1,0 +1,13 @@
+<?php 
+
+namespace contract_namespace;
+
+interface contract_class
+{
+    /**
+     * Specify the name of model
+     * 
+     * @return model_path\model_name
+     */
+    public function model();
+}

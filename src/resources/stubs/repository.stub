@@ -1,0 +1,27 @@
+<?php 
+
+namespace repository_namespace;
+
+use model_path\model_name;
+use Siganurame\Repositories\Repository;
+use contract_namespace\contract_class as RepositoryContract;
+
+class repository_class extends Repository implements RepositoryContract
+{
+	/**
+     * Fields repository that searchable
+     *
+     * @var array
+     */
+	protected $fieldSearchable = [];
+
+    /**
+     * Specify the name of model
+     * 
+     * @return model_path\model_name
+     */
+    public function model()
+    {
+        return model_name::class;
+    }
+}
