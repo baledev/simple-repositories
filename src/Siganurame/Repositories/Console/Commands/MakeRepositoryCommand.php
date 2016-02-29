@@ -82,12 +82,12 @@ class MakeRepositoryCommand extends Command
     protected function createRepository($repository, $model = null)
     {
         if($this->generator->create($repository, $model)) {
-            $this->info("Successfully created the $repository class");
+            return $this->info("Successfully created the $repository class");
         }
 
         if($this->confirm("Class $repository existed. Do You wish to override?")) {
             if($this->generator->create($repository, $model, true)) {
-                $this->info("Successfully override the $repository class");
+                return $this->info("Successfully override the $repository class");
             }
         }
     }
