@@ -58,11 +58,13 @@ abstract class Repository implements RepositoryContract
      */
 	public function makeModel()
 	{
-		if(! $this->model() instanceof \Illuminate\Database\Eloquent\Model) {
-			throw new RepositoryException("Class $this->model() must be instance of Illuminate\\Database\\Eloquent\\Model");
+		$model = $this->app->make($this->model());
+
+		if(! $model instanceof \Illuminate\Database\Eloquent\Model) {
+			throw new RepositoryException("Class {$this->model()} must be instance of Illuminate\\Database\\Eloquent\\Model");
 		}
 
-		return $this->app->make($this->model());
+		return $model;
 	}
 
 	/**
@@ -236,7 +238,7 @@ abstract class Repository implements RepositoryContract
 		$page = isset($params['page']) ? $params['page'] : 1;
 		$per_page = isset($params['per_page']) ? $params['per_page'] : config('repository.pagination.perPage');
 
-		$results = $this->buildPaginateQuery($params, $data['page'], $data['per_page']);
+		$results = $this->buildPaginateQuery($params, $page, $per_page);
 
 		$last_page  = $results['last_page'];
 		$total  = $results['total'];
@@ -262,11 +264,11 @@ abstract class Repository implements RepositoryContract
 
 		$table = $this->model->getTable();
 
-		$count = Cache::remember('count_'. $table, 2000, function() use($query) {
+		$total = Cache::remember('count_'. $table, 2000, function() use($query) {
 			return $query->count();
 		});
 
-		$last_page = ceil($count / $per_page);
+		$last_page = ceil($total / $per_page);
 
 		$query = $query->skip($per_page * ($page - 1))->take($per_page);
 
