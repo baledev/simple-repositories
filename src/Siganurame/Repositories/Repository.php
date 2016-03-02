@@ -268,7 +268,7 @@ abstract class Repository implements RepositoryContract
 			return $query->count();
 		});
 
-		$last_page = ceil($total / $per_page);
+		$last_page = (int) ceil($total / $per_page);
 
 		$query = $query->skip($per_page * ($page - 1))->take($per_page);
 
