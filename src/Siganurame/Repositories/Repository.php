@@ -272,7 +272,9 @@ abstract class Repository implements RepositoryContract
 
 		$query = $query->skip($per_page * ($page - 1))->take($per_page);
 
-		$query = $query->orderBy((isset($params['order']) and $params['order']) ? $params['order'] : null);
+		if(isset($params['order']) and $params['order']) {
+			$query = $query->orderBy($params['order']);
+		}
 
 		if(config('cache.default') == 'memcached' or config('cache.default') == 'redis') {
 			// cache tags tidak support untuk driver file atau database, hanya support memcached dan redis
