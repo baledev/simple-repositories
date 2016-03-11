@@ -343,7 +343,6 @@ abstract class Repository implements RepositoryContract
 	public function store(array $request)
 	{
 		if($instance = $this->model->create($request)) {
-			event(new RepoStore($instance));
 
 			return $instance;
 		}
@@ -360,7 +359,6 @@ abstract class Repository implements RepositoryContract
 	public function update(array $request, $model)
 	{
 		if($model->fill($request)->save()) {
-			event(new RepoUpdate($model));
 
 			return true;
 		}
@@ -376,7 +374,6 @@ abstract class Repository implements RepositoryContract
 	public function delete($model)
 	{
 		if($model->delete()) {
-			event(new RepoDestroy($model));
 
 			return true;
 		}
